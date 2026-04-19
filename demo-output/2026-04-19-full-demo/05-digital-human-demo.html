@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Showman 数字人完整演示</title>
+  <style>
+    :root {
+      --bg: #f4efe7;
+      --panel: rgba(255,255,255,0.84);
+      --line: rgba(44, 35, 23, 0.14);
+      --ink: #2d2418;
+      --muted: #6b5c4a;
+      --accent: #c55a2f;
+      --accent-soft: #f2d4c3;
+      --good: #2f7d5c;
+      --warn: #9b3d25;
+      --shadow: 0 18px 50px rgba(69, 48, 26, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(197,90,47,.16), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(47,125,92,.12), transparent 26%),
+        linear-gradient(135deg, #f7f3ed, #efe6d8);
+    }
+    .shell {
+      max-width: 1460px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(360px, 1.08fr) minmax(320px, 0.92fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .video-panel {
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-panel::before {
+      content: "";
+      position: absolute;
+      inset: auto -60px -70px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(197,90,47,.25), transparent 68%);
+      pointer-events: none;
+    }
+    .video-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #120f0c;
+      min-height: 720px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    video {
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      background: #120f0c;
+    }
+    .badge-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .badge {
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .side {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+    .section {
+      padding: 20px 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.1;
+      letter-spacing: .02em;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      padding: 14px;
+    }
+    .barrage-card {
+      margin-bottom: 10px;
+    }
+    .category-A { border-left: 6px solid #3666c9; }
+    .category-B { border-left: 6px solid #2f7d5c; }
+    .category-C { border-left: 6px solid #b4881d; }
+    .category-D { border-left: 6px solid #bb4430; }
+    .category-E { border-left: 6px solid #6f6f6f; }
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .message {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .reply {
+      color: var(--warn);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 13px;
+      line-height: 1.68;
+      color: #433627;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 1120px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .video-wrap {
+        min-height: 480px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="hero">
+      <section class="panel video-panel">
+        <h1>数字人完整演示</h1>
+        <p class="sub">这一页把数字人画面、直播脚本、弹幕处理和复盘结果放到一个可视化界面里。当前使用仓库内现有视频素材做本地演示，真实上线时再替换为 AIGCPanel / 硅基智能的实时数字人流。</p>
+        <div class="video-wrap">
+          <video controls autoplay muted loop playsinline poster="../../static_speaking.png">
+            <source src="../../讲解视频.mp4" type="video/mp4" />
+            你的浏览器暂不支持视频预览，可以用同目录下的静态图查看数字人状态。
+          </video>
+        </div>
+        <div class="badge-bar">
+          <span class="badge">商品：一川桑语 NFC60%桑葚复合果汁饮料</span>
+          <span class="badge">主播：主播小桑</span>
+          <span class="badge">模式：本地完整演示</span>
+        </div>
+      </section>
+
+      <aside class="side">
+        <section class="panel section">
+          <h2>直播脚本摘要</h2>
+          <pre># 一川桑语 NFC60%桑葚复合果汁饮料 直播口播脚本
+
+## 环节① 开场预热
+主播小桑：家人们晚上好，欢迎来到直播间！今天给大家带来的就是 一川桑语 NFC60%桑葚复合果汁饮料！
+主播小桑：先把福利给大家报一下，日常价29.9元/2瓶；直播间到手22.8元/2瓶；折合11.4元/瓶，想要的家人先点点关注，别等会儿找不到直播间。
+主播小桑：今天我们会把口感、配料、规格和怎么拍都讲清楚，听懂了直接点下方 果汁链接1 就行。
+
+## 环节② 痛点挖掘
+主播小桑：你是不是也遇到过这种情况，市面果汁多为浓缩勾兑，喝的不是真果汁？
+主播小桑：还有不少家人会担心，NFC100%果汁价格贵（15-17元/瓶），口感太浓太酸，不友好。
+主播小桑：还有不少家人会担心，想喝健康的又怕钱包受不了，又怕口感踩雷。
+主播小桑：所以我们今天这款 一川桑语 NFC60%桑葚复合果汁饮料，就是冲着把这些顾虑说透、把体验做好来的。
+
+## 环节③ 产品展示与卖点讲解
+主播小桑：先看第一个重点，NFC鲜榨工艺，非浓缩还原，桑葚鲜果压榨，原汁原味。
+主播小桑：再看一个重点，60%果汁含量，三代迭代配比，口感柔和不齁甜不太酸。
+主播小桑：再看一个重点，每瓶含60颗新鲜桑葚，花青素含量高达5mg/颗，抗氧化神器。
+主播小桑：再看一个重点，玻璃瓶包装，最大程度保持原味，无塑料异味，质感高级。</pre>
+        </section>
+
+        <section class="panel section">
+          <h2>弹幕处理结果</h2>
+          <div class="grid">
+            <div>
+        <div class="card barrage-card category-A">
+          <div class="meta">小雨 · A</div>
+          <div class="message">多少钱？</div>
+          <div class="reply">直播间22.8元/2瓶，折合11.4元/瓶，点下方果汁链接1就能拍啦～</div>
+        </div>
+        
+
+        <div class="card barrage-card category-A">
+          <div class="meta">阿杰 · A</div>
+          <div class="message">配料表有什么？</div>
+          <div class="reply">配料是桑葚汁60%、纯净水、白砂糖，喜欢的直接拍～</div>
+        </div>
+        
+
+        <div class="card barrage-card category-B">
+          <div class="meta">欢欢 · B</div>
+          <div class="message">还有库存吗？</div>
+          <div class="reply">库存还在动态变化，喜欢的家人抓紧拍哦～</div>
+        </div>
+        
+
+        <div class="card barrage-card category-C">
+          <div class="meta">露露 · C</div>
+          <div class="message">讲得真好</div>
+          <div class="reply">谢谢家人支持！觉得不错的点点关注不迷路哦～</div>
+        </div>
+        
+
+        <div class="card barrage-card category-D">
+          <div class="meta">木木 · D</div>
+          <div class="message">质量太差了</div>
+          <div class="reply">非常抱歉带来不好的体验，这边马上转人工场控跟进～</div>
+        </div>
+        
+
+        <div class="card barrage-card category-E">
+          <div class="meta">广告号 · E</div>
+          <div class="message">http://spam.example/buy-now</div>
+          <div class="reply">忽略</div>
+        </div>
+        </div>
+            <div>
+              <div class="card">
+                <div class="meta">投诉告警演示</div>
+                <ul><li>2026-04-19T14:16:49+08:00 · 木木 · demo_alert_sent</li></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel section">
+          <h2>复盘报告摘要</h2>
+          <pre># 直播复盘报告
+
+&gt; 日期: 2026-04-19
+&gt; 商品: 一川桑语 NFC60%桑葚复合果汁饮料
+&gt; 主播: 主播小桑
+
+---
+
+## 📊 数据总览
+
+| 指标 | 数值 | 行业参考 | 评价 |
+|------|------|---------|------|
+| 直播时长 | 90分钟 | — | — |
+| 总观看人次 | 3200 | — | — |
+| 最高在线人数 | 420 | — | — |
+| 新增粉丝 | 68 | 转粉率=2.12% | 高于1%为优 |
+| 评论总数 | 6 | 互动率=0.19% | 高于3%为优 |
+| 点赞总数 | 1880 | — | — |
+| 商品点击次数 | 214 | 点击率=6.69% | 高于5%为优 |
+| 成交订单数 | 16 | 转化率=7.48% | 高于3%为优 |
+| 预估销售额 | 364.80 | 客单价=22.80 | — |
+
+## 🔍 弹幕分析
+
+### 高频关键词 TOP10
+1. 多少钱</pre>
+          <p class="footer-note">真实外部接入时，这里对应的就是下播后自动生成的复盘结果。</p>
+        </section>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

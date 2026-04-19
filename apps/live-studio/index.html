@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Showman Live Studio</title>
+  <link rel="stylesheet" href="/styles.css?v=20260419b" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar panel">
+      <div>
+        <p class="eyebrow">SHOWMAN LIVE STUDIO</p>
+        <h1 id="roomTitle">数字人直播控制台</h1>
+        <p class="muted" id="roomMeta">本地演示与真实接入桥统一在这一页联调。</p>
+      </div>
+      <div class="topbar-status">
+        <span class="badge live" id="sessionStatus">LIVE</span>
+        <span class="badge" id="productBadge">商品加载中</span>
+        <span class="badge" id="hostBadge">主播加载中</span>
+      </div>
+    </header>
+
+    <main class="main-grid">
+      <section class="stage-wrap panel">
+        <div class="stage-header">
+          <div>
+            <p class="eyebrow">DIGITAL HUMAN STAGE</p>
+            <h2>直播画面</h2>
+          </div>
+          <div class="metric-row">
+            <div class="metric-pill">
+              <span>弹幕</span>
+              <strong id="metricBarrage">0</strong>
+            </div>
+            <div class="metric-pill">
+              <span>回复</span>
+              <strong id="metricReplies">0</strong>
+            </div>
+            <div class="metric-pill alert">
+              <span>告警</span>
+              <strong id="metricAlerts">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-frame" id="stageFrame">
+          <video id="stageVideo" class="stage-video" controls autoplay loop playsinline></video>
+          <img id="stageSpeakingImage" class="stage-portrait" alt="数字人说话状态" />
+          <div class="stage-overlay">
+            <div class="stage-live-bar">
+              <span class="live-dot"></span>
+              <span>数字人直播中</span>
+            </div>
+            <div class="stage-chip-group">
+              <span class="stage-chip" id="nextLiveChip">下场预告加载中</span>
+              <span class="stage-chip" id="aigcpanelChip">AIGCPanel 未连接</span>
+              <span class="stage-chip" id="feishuChip">飞书未配置</span>
+              <span class="stage-chip" id="voiceChip">语音未开启</span>
+            </div>
+          </div>
+          <div class="product-spotlight">
+            <p class="eyebrow">ON AIR PRODUCT</p>
+            <h3 id="spotlightProduct">商品加载中</h3>
+            <p class="muted" id="spotlightHost">主播加载中</p>
+          </div>
+          <div class="reply-bubble" id="currentReplyBubble">
+            <p class="eyebrow">当前播报</p>
+            <div id="currentReplyText">还没有生成回复，先点击“载入完整演示”或手动注入弹幕。</div>
+            <div class="voice-controls">
+              <button class="secondary-button" id="enableVoiceBtn" type="button">开启播报</button>
+              <button class="ghost-button" id="speakNowBtn" type="button">试听当前播报</button>
+              <button class="ghost-button" id="stopVoiceBtn" type="button">停止语音</button>
+            </div>
+          </div>
+          <div class="stage-subtitle" id="stageSubtitle">
+            <div class="subtitle-head">
+              <span id="stageSubtitleSpeaker">数字人待命中</span>
+              <div class="subtitle-bars">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div id="stageSubtitleText">新回复出现后，这里会显示当前正在播报的内容。</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-column">
+        <section class="panel feed-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">LIVE CHAT</p>
+              <h2>弹幕流</h2>
+            </div>
+            <button class="ghost-button" id="loadDemoBtn">载入完整演示</button>
+          </div>
+          <div id="barrageFeed" class="feed-list empty-state">还没有弹幕进入桥。</div>
+        </section>
+
+        <section class="panel alert-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">CONTROL ALERTS</p>
+              <h2>告警与异常</h2>
+            </div>
+          </div>
+          <div id="alertFeed" class="alert-list empty-state">当前没有投诉告警。</div>
+          <div class="error-box">
+            <h3>最近错误</h3>
+            <div id="errorFeed" class="error-list empty-state">暂无错误。</div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <section class="lower-grid">
+      <section class="panel control-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">SESSION CONTROL</p>
+            <h2>开播控制</h2>
+          </div>
+        </div>
+        <form id="sessionForm" class="form-grid">
+          <label>
+            <span>直播间标题</span>
+            <input type="text" name="room_title" placeholder="一川桑语数字人直播间" />
+          </label>
+          <label>
+            <span>商品关键词</span>
+            <input type="text" name="product" placeholder="输入商品名或关键词" />
+          </label>
+          <label>
+            <span>主播名称</span>
+            <input type="text" name="host_name" placeholder="主播小桑" />
+          </label>
+          <label>
+            <span>下场预告</span>
+            <input type="text" name="next_live_time" placeholder="本周五晚上 8 点" />
+          </label>
+          <button type="submit" class="primary-button">重建本场直播</button>
+        </form>
+
+        <div class="ops-block">
+          <div>
+            <p class="eyebrow">MANUAL BARRAGE</p>
+            <h3>手动注入弹幕</h3>
+          </div>
+          <form id="barrageForm" class="form-grid compact">
+            <label>
+              <span>用户昵称</span>
+              <input type="text" name="user" placeholder="新观众" />
+            </label>
+            <label class="wide">
+              <span>弹幕内容</span>
+              <input type="text" name="message" placeholder="例如：多少钱？" />
+            </label>
+            <button type="submit" class="primary-button">发送到桥</button>
+          </form>
+        </div>
+
+        <div class="ops-block">
+          <div>
+            <p class="eyebrow">MANUAL BROADCAST</p>
+            <h3>指定播报内容</h3>
+          </div>
+          <form id="manualBroadcastForm" class="form-grid compact">
+            <label>
+              <span>播报人</span>
+              <input type="text" name="speaker" placeholder="主播小桑" />
+            </label>
+            <label class="wide">
+              <span>播报内容</span>
+              <textarea name="text" rows="4" placeholder="输入你想让数字人直接播报的内容"></textarea>
+            </label>
+            <button type="submit" class="primary-button">立即播报这段话</button>
+          </form>
+        </div>
+
+        <div class="ops-block">
+          <div>
+            <p class="eyebrow">MANUAL REPLY</p>
+            <h3>人工回复弹幕</h3>
+          </div>
+          <form id="manualReplyForm" class="form-grid compact">
+            <label>
+              <span>弹幕用户</span>
+              <input type="text" name="user" placeholder="点击右侧弹幕可自动带入" />
+            </label>
+            <label>
+              <span>回复分类</span>
+              <input type="text" name="category" placeholder="MANUAL" value="MANUAL" />
+            </label>
+            <label class="wide">
+              <span>原始弹幕</span>
+              <textarea name="message" rows="3" placeholder="要回复的弹幕内容"></textarea>
+            </label>
+            <label class="wide">
+              <span>回复内容</span>
+              <textarea name="reply" rows="4" placeholder="输入你要直接播报/发送的回复"></textarea>
+            </label>
+            <button type="submit" class="primary-button">回复这条弹幕</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel integration-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">REAL INTEGRATIONS</p>
+            <h2>接入联调</h2>
+          </div>
+        </div>
+
+        <div class="integration-row">
+          <div class="integration-card">
+            <h3>AIGCPanel</h3>
+            <p class="muted">推送当前播报到官方 launcher API，并查询任务状态。</p>
+            <div class="button-row">
+              <button class="secondary-button" id="aigcPingBtn" type="button">Ping</button>
+              <button class="secondary-button" id="aigcSubmitBtn" type="button">提交当前播报</button>
+              <button class="secondary-button" id="aigcQueryBtn" type="button">查询任务</button>
+              <button class="ghost-button" id="aigcCancelBtn" type="button">取消任务</button>
+            </div>
+            <pre id="aigcResult" class="result-box">等待操作</pre>
+          </div>
+
+          <div class="integration-card">
+            <h3>飞书 / 弹幕源</h3>
+            <p class="muted">验证投诉预警链路，并观察外部弹幕源心跳。</p>
+            <div class="button-row">
+              <button class="secondary-button" id="feishuTestBtn" type="button">发送飞书测试</button>
+              <button class="ghost-button" id="reviewBtn" type="button">生成本场复盘</button>
+            </div>
+            <pre id="relayResult" class="result-box">等待操作</pre>
+          </div>
+        </div>
+
+        <div class="reply-history-wrap">
+          <div>
+            <p class="eyebrow">REPLY QUEUE</p>
+            <h3>最近播报队列</h3>
+          </div>
+          <div id="replyHistory" class="reply-list empty-state">还没有播报队列。</div>
+        </div>
+      </section>
+
+      <section class="panel script-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">SCRIPT & REVIEW</p>
+            <h2>脚本与复盘</h2>
+          </div>
+        </div>
+        <div class="script-review-grid">
+          <div>
+            <h3>当前脚本</h3>
+            <pre id="scriptPreview" class="large-pre">脚本加载中...</pre>
+          </div>
+          <div>
+            <h3>最近复盘</h3>
+            <pre id="reviewPreview" class="large-pre">还没有生成复盘。</pre>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="footer-status panel">
+      <div class="footer-item">
+        <span>桥状态</span>
+        <strong id="bridgeStatus">已连接</strong>
+      </div>
+      <div class="footer-item">
+        <span>弹幕源</span>
+        <strong id="barrageStatus">等待接入</strong>
+      </div>
+      <div class="footer-item">
+        <span>飞书</span>
+        <strong id="feishuStatus">未配置</strong>
+      </div>
+      <div class="footer-item">
+        <span>AIGCPanel</span>
+        <strong id="aigcStatus">未启用</strong>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/app.js?v=20260419b"></script>
+</body>
+</html>

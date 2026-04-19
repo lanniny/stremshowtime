@@ -1,0 +1,5 @@
+{"file": ".agents/skills/finish-work/SKILL.md", "reason": "Finish work checklist"}
+{"file": ".agents/skills/check/SKILL.md", "reason": "Code quality check spec"}
+{"file": ".trellis/spec/guides/cross-layer-thinking-guide.md", "reason": "Verify state handoff across API/UI/integration boundaries."}
+{"file": ".trellis/spec/backend/error-handling.md", "reason": "Review integration failure handling and safe degradation."}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Review operator-facing UI clarity and output accuracy."}

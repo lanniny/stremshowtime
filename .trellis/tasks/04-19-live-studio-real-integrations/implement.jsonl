@@ -1,0 +1,12 @@
+{"file": ".trellis/workflow.md", "reason": "Project workflow and conventions"}
+{"file": ".trellis/spec/backend/index.md", "reason": "Backend development guide"}
+{"file": ".trellis/spec/frontend/index.md", "reason": "Frontend development guide"}
+{"file": ".trellis/spec/backend/directory-structure.md", "reason": "Place shared runtime and bridge files in consistent locations."}
+{"file": ".trellis/spec/backend/logging-guidelines.md", "reason": "Bridge state, alerts, and logs need stable operator-facing records."}
+{"file": ".trellis/spec/backend/quality-guidelines.md", "reason": "Keep runtime roles separated while adding shared bridge logic."}
+{"file": ".trellis/spec/frontend/type-safety.md", "reason": "Validate JSON/config and UI contract data before rendering."}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Operator-facing live studio must stay clear and accurate."}
+{"file": ".trellis/spec/frontend/directory-structure.md", "reason": "Add the local UI under an isolated app directory."}
+{"file": ".trellis/spec/guides/cross-layer-thinking-guide.md", "reason": "This task crosses UI, runtime state, webhook, barrage source, and digital human integration boundaries."}
+{"file": ".trellis/spec/backend/error-handling.md", "reason": "Live bridge and integrations must fail safely with operator-actionable errors."}
+{"file": ".trellis/spec/guides/code-reuse-thinking-guide.md", "reason": "Reuse existing runtime modules and product data contracts rather than duplicating logic."}

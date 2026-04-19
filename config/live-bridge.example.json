@@ -1,0 +1,73 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8765,
+    "auto_push_replies": false,
+    "poll_interval_ms": 1500
+  },
+  "session": {
+    "room_title": "一川桑语数字人直播间",
+    "product": "一川桑语 NFC60%桑葚复合果汁饮料",
+    "host_name": "主播小桑",
+    "next_live_time": "本周五晚上 8 点"
+  },
+  "assets": {
+    "stage_video": "讲解视频.mp4",
+    "idle_image": "static_idle.png",
+    "speaking_image": "static_speaking.png",
+    "poster_image": "static_speaking.png"
+  },
+  "integrations": {
+    "feishu": {
+      "webhook_env": "FEISHU_WEBHOOK_URL",
+      "webhook_url": ""
+    },
+    "aigcpanel": {
+      "enabled": false,
+      "base_url": "http://127.0.0.1:8888",
+      "probeBaseUrls": [
+        "http://127.0.0.1:8888",
+        "http://127.0.0.1:3030"
+      ],
+      "ping_path": "/ping",
+      "config_path": "/config",
+      "submit_path": "/submit",
+      "query_path": "/query",
+      "cancel_path": "/cancel",
+      "upload_path": "/upload",
+      "download_path": "/download",
+      "root": "I:/aigcpanel",
+      "entry": "python",
+      "entryArgs": [
+        "I:/aigcpanel/workflows/live_avatar.py",
+        "--text",
+        "${TEXT}",
+        "--host",
+        "${HOST_NAME}",
+        "--product",
+        "${PRODUCT_NAME}"
+      ],
+      "entryPlaceholders": {
+        "VOICE_NAME": "主播小桑"
+      },
+      "envs": {
+        "SHOWMAN_ROOM_TITLE": "${ROOM_TITLE}",
+        "SHOWMAN_SESSION_ID": "${SESSION_ID}"
+      },
+      "resultRoots": [
+        "C:/Users/<user>/AppData/Roaming/aigcpanel"
+      ],
+      "auto_query": true,
+      "query_interval_ms": 2000,
+      "query_max_attempts": 45,
+      "headers": {},
+      "timeout_seconds": 10
+    }
+  },
+  "barrage_source": {
+    "websocket_url": "ws://127.0.0.1:8888",
+    "relay_url": "http://127.0.0.1:8765/api/barrage",
+    "format": "barragegrab_type3",
+    "timeout_seconds": 5
+  }
+}

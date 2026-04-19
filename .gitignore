@@ -1,0 +1,15 @@
+.ace-tool/
+.playwright-mcp/
+__pycache__/
+*.py[cod]
+tmp*/
+config/live-bridge.json
+data/live-bridge.out.log
+data/live-bridge.err.log
+data/live-bridge-*.out.log
+data/live-bridge-*.err.log
+data/tts-probe-*.wav
+data/barrage-logs/*
+!data/barrage-logs/.gitkeep
+data/review-reports/*
+!data/review-reports/.gitkeep

@@ -1,0 +1,9 @@
+{"file": ".trellis/workflow.md", "reason": "Project workflow and conventions"}
+{"file": ".trellis/spec/backend/index.md", "reason": "Backend development guide"}
+{"file": ".trellis/tasks/04-19-centralize-product-catalog/prd.md", "reason": "Task requirements and acceptance criteria"}
+{"file": ".trellis/spec/backend/database-guidelines.md", "reason": "Current file-based product catalog and centralization rules"}
+{"file": ".trellis/spec/guides/cross-layer-thinking-guide.md", "reason": "Cross-layer flow for product catalog consumers"}
+{"file": "skills/livestream-script/SKILL.md", "reason": "Current script-generation consumer of product catalog"}
+{"file": "skills/barrage-responder/SKILL.md", "reason": "Current barrage-response consumer of product catalog"}
+{"file": "data/product-catalog/products.json", "reason": "Canonical product catalog source"}
+{"file": "scripts/sync-product-catalog.py", "reason": "Sync mirrored skill catalogs from canonical source"}
