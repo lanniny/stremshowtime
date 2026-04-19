@@ -3,6 +3,13 @@
 __pycache__/
 *.py[cod]
 tmp*/
+.trellis/tasks/*
+!.trellis/tasks/.gitkeep
+.trellis/workspace/*/
+demo-output/
+!data/demo-output/
+data/demo-output/*
+!data/demo-output/.gitkeep
 config/live-bridge.json
 data/live-bridge.out.log
 data/live-bridge.err.log

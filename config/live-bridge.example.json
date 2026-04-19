@@ -36,10 +36,10 @@
       "cancel_path": "/cancel",
       "upload_path": "/upload",
       "download_path": "/download",
-      "root": "I:/aigcpanel",
+      "root": "C:/path/to/aigcpanel",
       "entry": "python",
       "entryArgs": [
-        "I:/aigcpanel/workflows/live_avatar.py",
+        "C:/path/to/aigcpanel/workflows/live_avatar.py",
         "--text",
         "${TEXT}",
         "--host",
@@ -55,7 +55,8 @@
         "SHOWMAN_SESSION_ID": "${SESSION_ID}"
       },
       "resultRoots": [
-        "C:/Users/<user>/AppData/Roaming/aigcpanel"
+        "C:/path/to/aigcpanel/outputs",
+        "C:/path/to/aigcpanel/cache"
       ],
       "auto_query": true,
       "query_interval_ms": 2000,

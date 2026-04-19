@@ -102,8 +102,8 @@ def render_visual_demo_html(
     alert_events: list[dict[str, str]],
     review_markdown: str,
 ) -> str:
-    video_rel = Path("../../讲解视频.mp4").as_posix()
-    poster_rel = Path("../../static_speaking.png").as_posix()
+    video_rel = Path("../../../讲解视频.mp4").as_posix()
+    poster_rel = Path("../../../static_speaking.png").as_posix()
     script_preview = "\n".join(script_text.splitlines()[:18])
     review_preview = "\n".join(review_markdown.splitlines()[:26])
     barrage_cards = "\n".join(
@@ -360,7 +360,7 @@ def main() -> int:
 
     timestamp = datetime.now().astimezone()
     session_date = timestamp.date().isoformat()
-    output_dir = ROOT / "demo-output" / f"{session_date}-full-demo"
+    output_dir = ROOT / "data" / "demo-output" / f"{session_date}-full-demo"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Phase 1: script generation

@@ -76,7 +76,7 @@ class AIGCPanelPayloadTests(unittest.TestCase):
 
     def test_parse_query_logs_extracts_media_artifact(self) -> None:
         result_json = json.dumps(
-            {"audio": "C:\\Users\\demo\\AppData\\Roaming\\aigcpanel\\cache\\reply.wav"},
+            {"audio": "C:\\aigcpanel-test\\cache\\reply.wav"},
             ensure_ascii=False,
         ).encode("utf-8")
         encoded = base64.b64encode(result_json).decode("ascii")
@@ -87,7 +87,7 @@ class AIGCPanelPayloadTests(unittest.TestCase):
         self.assertEqual(parsed["media_kind"], "audio")
         self.assertEqual(
             parsed["local_path"],
-            "C:\\Users\\demo\\AppData\\Roaming\\aigcpanel\\cache\\reply.wav",
+            "C:\\aigcpanel-test\\cache\\reply.wav",
         )
 
 

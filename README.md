@@ -94,7 +94,7 @@ pip install websocket-client
 - 官方数字人直播说明: [https://aigcpanel.com/zh/document/32](https://aigcpanel.com/zh/document/32)
 - 官方数字人直播推流配置: [https://aigcpanel.com/zh/document/40](https://aigcpanel.com/zh/document/40)
 - 官方开源仓库: [https://github.com/modstart-lib/aigcpanel](https://github.com/modstart-lib/aigcpanel)
-- [P0-AIGCPanel安装与数字人制作.md](/I:/514claude/showman/docs/guides/P0-AIGCPanel安装与数字人制作.md)
+- [P0-AIGCPanel安装与数字人制作.md](docs/guides/P0-AIGCPanel安装与数字人制作.md)
 
 注意：
 
@@ -115,7 +115,7 @@ pip install websocket-client
 ### 第 1 步：进入项目目录
 
 ```powershell
-cd I:\514claude\showman
+cd stremshowtime
 ```
 
 ### 第 2 步：复制本地配置文件
@@ -620,7 +620,7 @@ config/live-bridge.json
 ```json
 "entry": "python",
 "entryArgs": [
-  "I:/aigcpanel/workflows/live_avatar.py",
+  "C:/path/to/aigcpanel/workflows/live_avatar.py",
   "--text",
   "${TEXT}",
   "--host",
@@ -632,7 +632,7 @@ config/live-bridge.json
 
 这里一定要注意：
 
-- 示例里的 `I:/aigcpanel/...` 只是模板
+- 示例里的 `C:/path/to/aigcpanel/...` 只是模板
 - 你必须改成你机器上真实存在的工作流路径
 
 ### 第 8 步：配置结果目录
@@ -641,8 +641,8 @@ config/live-bridge.json
 
 ```json
 "resultRoots": [
-  "C:/Users/你的用户名/AppData/Roaming/aigcpanel",
-  "C:/Users/你的用户名/AppData/Local/aigcpanel"
+  "C:/path/to/aigcpanel/outputs",
+  "C:/path/to/aigcpanel/cache"
 ]
 ```
 
@@ -902,8 +902,8 @@ tests/                           运行时测试
 
 如果你已经把 README 跑通了，接下来建议按这个顺序继续看：
 
-1. [P1-本地直播控制台与真实接入联调.md](/I:/514claude/showman/docs/guides/P1-本地直播控制台与真实接入联调.md)
-2. [P0-AIGCPanel安装与数字人制作.md](/I:/514claude/showman/docs/guides/P0-AIGCPanel安装与数字人制作.md)
+1. [P1-本地直播控制台与真实接入联调.md](docs/guides/P1-本地直播控制台与真实接入联调.md)
+2. [P0-AIGCPanel安装与数字人制作.md](docs/guides/P0-AIGCPanel安装与数字人制作.md)
 
 第一份告诉你“仓库怎么接”，第二份告诉你“AIGCPanel 里怎么把资产准备好”。
 
