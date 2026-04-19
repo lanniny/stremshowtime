@@ -8,6 +8,29 @@
 
 ## 第一步: 下载安装 AIGCPanel
 
+先把这些官方入口收藏起来，后面按步骤点会轻松很多：
+
+1. 官方首页: [https://aigcpanel.com/](https://aigcpanel.com/)
+2. 官方下载页: [https://aigcpanel.com/zh/download](https://aigcpanel.com/zh/download)
+3. 官方 Windows 安装教程: [https://aigcpanel.com/zh/document/69](https://aigcpanel.com/zh/document/69)
+4. 官方声音克隆步骤: [https://aigcpanel.com/zh/document/8](https://aigcpanel.com/zh/document/8)
+5. 官方声音合成步骤: [https://aigcpanel.com/zh/document/9](https://aigcpanel.com/zh/document/9)
+6. 官方视频合成步骤: [https://aigcpanel.com/zh/document/10](https://aigcpanel.com/zh/document/10)
+7. 官方数字人直播说明: [https://aigcpanel.com/zh/document/32](https://aigcpanel.com/zh/document/32)
+8. 官方直播推流配置: [https://aigcpanel.com/zh/document/40](https://aigcpanel.com/zh/document/40)
+9. 官方开源仓库: [https://github.com/modstart-lib/aigcpanel](https://github.com/modstart-lib/aigcpanel)
+
+## 先说清楚你在 AIGCPanel 里最少要做完什么
+
+如果你最终是要把它接到本仓库的直播控制台里，那你至少要在 AIGCPanel 软件里完成这 4 件事：
+
+1. 下载并启动一个可用的声音模型
+2. 做成功一次声音克隆或声音合成
+3. 上传一个数字人形象并成功生成一次视频
+4. 能在软件里看到对应任务结果或输出文件
+
+只安装软件但没有做完这 4 步，后面就算点通了 bridge，也不会有你想要的真人效果。
+
 ### 1.1 下载
 
 打开浏览器访问: **https://aigcpanel.com/zh/download**
@@ -28,6 +51,31 @@
 2. 软件会提示**下载模型**
 3. 点击下载，等待模型下载完成（可能需要10-30分钟，取决于网速）
 4. 下载完成后，模型状态显示为**绿色**即可使用
+
+如果你打开后没有看到模型，或者模型一直启动失败，先不要急着做声音和视频。
+
+最重要的检查只有一句话：
+
+```text
+模型状态必须是绿色
+```
+
+## 1.4 小白第一次打开软件建议这样走
+
+为了不迷路，推荐你按下面顺序点界面：
+
+1. 先看“模型管理”或资源下载页
+2. 先把声音模型下载并启动
+3. 再去“我的音色”上传参考音频
+4. 再去“声音克隆”页生成第一条克隆语音
+5. 再去“声音合成”页生成第一条普通 TTS
+6. 再去“数字人形象管理”上传人物视频
+7. 再去“视频合成”页生成第一条数字人视频
+8. 如果后面要正式直播，再看“数字人直播”页和推流页
+
+你第一次操作时，不建议一上来就直接点“数字人直播”。
+
+先把声音和视频都单独跑通，后面排错会简单很多。
 
 ---
 
@@ -50,6 +98,8 @@
 
 ### 2.2 在 AIGCPanel 中克隆
 
+官方页面: [https://aigcpanel.com/zh/document/8](https://aigcpanel.com/zh/document/8)
+
 1. 打开 AIGCPanel → 进入**「声音克隆」**模块
 2. 点击**「添加音色」** → 上传刚录制的声音文件
 3. 选择一个**运行中的模型**（绿色状态的）
@@ -59,6 +109,31 @@
 6. 点击**「开始克隆」**
 7. 等待完成 → 播放试听效果
 8. 效果满意就可以用了！
+
+做到这里，至少要有一个可以直接试听的克隆结果。
+
+如果没有试听结果，或者结果里声音断裂、噪音明显，先重新换一段更干净的 5-10 秒参考音频再试。
+
+## 2.3 再做一次普通声音合成
+
+官方页面: [https://aigcpanel.com/zh/document/9](https://aigcpanel.com/zh/document/9)
+
+这一步不是必须，但我强烈建议你做，因为它可以帮你判断：
+
+```text
+到底是“音色素材有问题”，还是“整个声音模型链路都没跑通”
+```
+
+操作顺序：
+
+1. 进入**「声音合成」**
+2. 选择绿色状态的声音模型
+3. 选择一个可用音色
+4. 输入一段短文案
+5. 点击**「开始合成」**
+6. 等待完成后试听
+
+如果普通声音合成可以正常播放，但声音克隆不行，通常问题更可能在参考音频本身。
 
 ---
 
@@ -91,6 +166,8 @@
 
 ### 3.2 在 AIGCPanel 中制作数字人
 
+官方页面: [https://aigcpanel.com/zh/document/10](https://aigcpanel.com/zh/document/10)
+
 1. 打开 AIGCPanel → 进入**「视频合成」**模块
 2. 上传录制好的形象视频
 3. 选择之前克隆好的声音
@@ -98,6 +175,18 @@
 5. 点击**「合成」**
 6. 等待处理完成
 7. 预览效果 — 检查口型是否同步、声音是否自然
+
+如果你在界面里先找到了“数字人形象管理”，建议先在那里上传形象视频，再去“视频合成”页选取这个形象。
+
+很多新手第一次卡住，不是模型坏了，而是还没有先创建“可选择的形象”。
+
+## 3.3 做完视频后检查这 3 件事
+
+1. 生成结果能直接播放
+2. 口型和声音基本同步
+3. 你能在软件里找到任务记录或输出文件位置
+
+这第三点很重要，因为后面仓库接 bridge 时，往往就要靠这些结果目录做回放映射。
 
 ---
 
@@ -116,6 +205,11 @@
 ### 4.2 开播配置
 
 **方式一: 通过抖音直播伴侣（推荐）**
+
+官方页面:
+
+1. 数字人直播说明: [https://aigcpanel.com/zh/document/32](https://aigcpanel.com/zh/document/32)
+2. 直播推流配置: [https://aigcpanel.com/zh/document/40](https://aigcpanel.com/zh/document/40)
 
 1. 打开 AIGCPanel → 进入**「数字人直播」**模块
 2. 选择制作好的数字人形象
@@ -144,6 +238,22 @@ AIGCPanel 支持直播互动功能:
 **与 OpenClaw 配合**:
 - AIGCPanel 负责: 数字人形象驱动 + TTS语音播报
 - OpenClaw 负责: 弹幕智能分类 + 回复内容生成 + 投诉通知
+
+---
+
+## 第四步半: 如果你的目标是接本仓库，这里就已经够了
+
+你不一定非要先推流到抖音，才能接本仓库。
+
+对 `showman` 这个仓库来说，真正重要的是下面这几件事已经成立：
+
+1. AIGCPanel 软件本身可以打开
+2. 模型能启动到绿色状态
+3. 声音克隆或声音合成至少成功一次
+4. 视频合成至少成功一次
+5. 你知道输出目录大概在哪里
+
+做到这里，就可以回到仓库里的 `README`，继续配置 `config/live-bridge.json` 去联调。
 
 ---
 
